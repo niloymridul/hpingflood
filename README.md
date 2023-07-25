@@ -71,14 +71,15 @@ Now I will explain what each of these means:
 </p>
 
 <h2></h2>
--1 - (sudo - provide admin privileges so that we can use the command.)
--2 - (hping3 - used to tell the console what tool we are using)
--3 - (-c 15000 - We are sending this amount of packets)
--4 - (-d 120 - the size of each packet)
--5 - (-S - the type of flag which in this case is an SYN flag)
--6 - (-w 64 - TCP windows size. Don't worry too much about this)
--7 - (--rand-source - Generates spoofed IP addresses to disguise the real source and avoid detection)
--8 - (--flood - Sends packets as fast as possible)
+
+- 1 - sudo - provide admin privileges so that we can use the command.
+- 2 - hping3 - used to tell the console what tool we are using.
+- 3 - -c 15000 - We are sending this amount of packets.
+- 4 - -d 120 - the size of each packet.
+- 5 - -S - the type of flag which in this case is an SYN flag
+- 6 - -w 64 - TCP windows size. Don't worry too much about this
+- 7 - --rand-source - Generates spoofed IP addresses to disguise the real source and avoid detection
+- 8 - --flood - Sends packets as fast as possible
 
 
 
