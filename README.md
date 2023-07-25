@@ -21,7 +21,7 @@ Let's go to our Windows Virtual Machine. We are going to turn off Firewall. Now,
 </p>
 
 <p align="center">
-<img src="https://github.com/niloymridul/hpingflood/assets/139414980/0b8989d8-73b6-4c71-ae8d-b2884764c879" height="60%" width="60%" alt="VMBOX look"/>
+<img src="https://github.com/niloymridul/hpingflood/assets/139414980/0b8989d8-73b6-4c71-ae8d-b2884764c879" height="60%" width="60%" alt="Firewall"/>
 </p>
 
 <p>
@@ -31,7 +31,7 @@ Now, let's backtrack to our Kali Linux Virtual Machine. I want you to open up th
 </p>
 
 <p align="center">
-<img src="https://github.com/niloymridul/hpingflood/assets/139414980/c3c4b1dd-a008-4552-a61c-7ddea0b8831b" height="60%" width="60%" alt="VMBOX look"/>
+<img src="https://github.com/niloymridul/hpingflood/assets/139414980/c3c4b1dd-a008-4552-a61c-7ddea0b8831b" height="60%" width="60%" alt="Ping Kali"/>
 </p>
 
 <p>
@@ -43,71 +43,26 @@ Now, try pinging the Windows IP  address like we had done before and capturing i
 </p>
 
 <p>
-Now you can finally start and log in to the virtual machines you have finally made. Click on Start for both of them and log in. We will have to install a program called Wireshark on the Windows computer. This will be the last thing we will need to install before we can start packet detection. Click the link below and we will start installing the software.
-</p>
-
-[Click here to go to the official download webpage of Wireshark!](https://www.wireshark.org/download.html)
-
-<p>
-The reason we use Wireshark is because Wireshark is not only capable of seeing traffic from the one running it but also from other computers running on the network as well. Just click next or noted for the most part unless you want to have a desktop icon then go ahead. Feel free to configure the installation process however you feel. Install npcap and usbpcap if desired as they will be needed to work with Wireshark.
-</p>
-
-
-<p align="center">
-<img src="https://github.com/niloymridul/klmwdetect/assets/139414980/4e586eda-98b7-433f-82c1-6dc38adfa3d9" alt="Wireshark logo"/>
+For reference, the three-way handshake is a method used in networks for computers and servers to establish a connection. The client (us) sends a SYN packet as a way to want to state the client wants to communicate with the server. The server in turn sends a SYN ACK packet to the client stating that it is ready for communication and the client sends the server one last packet called an ACK packet stating that it will begin doing business with the server.
 </p>
 
 
 <p>
-Once it is installed, search for it with the search function when hitting the Windows key or clicking the desktop icon if you had made one. Make sure to run as admin or else the program will give many prompts asking you for admin privileges. Click Ethernet to start capturing packets below the header that says Capture The image below explains what each part of the Wireshark interface does.  
-</p>
+With this in mind, we are going to start using hping3. hping3 is a network tool able to send custom data packets whether they be ICMP, UDP, and TCP packets, and is automatically installed in Kali Linux so we do not need to install it. In this case, we are first going to send a packet to one of the ports we had seen open from the scans of Nmap. We are only going to send a few so type in the following command.
+sudo hping3 -p (one open port from the previous Nmap scan) (Windows IP Address).
 
-<p align="center">
-<img src="https://github.com/niloymridul/klmwdetect/assets/139414980/fb17a524-9117-4403-9990-681047f9263c" height="80%" width="80%" alt="Wireshark logo"/>
-</p>
+We use sudo because for some commands we need admin privileges which in Linux's case is called sudo rather than admin like how Windows would use. -p is for TCP Push flag which is a data packet used to indicate that the device needs to deliver said data as soon as it can rather than buffering it. This is good for what we are going to do next.
 
-<p>
-There are four parts you want to keep in mind. 
-</p>
-<h2></h2>
-
-- 1 - This is the filter bar. Type in what you want to see and the interface will filter results to what you desire.
-- 2 - This is the packet list area. This display all the packets that were captured in the network and going throughout.
-- 3 - This is the packet details panel. This shows all the protocols and the information that comes with it. You can open each protocol up for more details
-- 4 - This is the packet bytes panel. This is the panel where all packet data is dumped and shown and decrypted.
-
-<p>
-Now what I want you to do is go to the Windows Console and type in ipconfig. The IPV4 address is the IP address of the Windows Virtual Machine. This is to check the IP address of the virtual machine so we can ping it and capture the data being sent.
-</p>
-
-<p align="center">
-<img src="https://github.com/niloymridul/klmwdetect/assets/139414980/5b2de2f9-9296-4adf-ba62-9c5f1bde7562" height="80%" width="80%" alt="Wireshark logo"/>
-</p>
-
-
-<p>
-So with the Windows IP address in mind, we can go to the Kali Linux virtual machine and sign in. We will then have to open the console and type in ping and then the IP address. Seeing as we started to capture from Windows, nothing will happen yet until we hit enter in the Kali Linux virtual machine. 
-</p>
-
-
-<p>
-As you can see, a lot of the pings on the Kali Linux side are not going through. The reason why is that the firewall is on. This is reflected on Wireshark as it states no response was found. But you can hit Ctrl and C on the Kali Linux machine to stop pinging. Go ahead and comb through the Windows Wireshark captured packets that it caught on the network.
+Now, hping3 can be used for malicious purposes if possible. Seeing as we are able to experiment and it's our own network we don't need to ask for permission but if it wasn't, then we would have to, or else we would break the law.
 </p>
 
 <p>
-To reinforce the idea that a firewall is effective, we will start to use Nmap. Nmap is also a network scanner but it doesn't come with a interface and is more for security auditing and network scanning. Now do not use this on public or private networks unless you own it or have permission as it is illegal. But for this case, we can.
+Moving on from that, one thing hping3 can do is called a SYN flood. We will be sending a large number of SYN packets to the server or in this case our Windows Computer. To clarify, hping3 sends these packets to the server using spoofed IP addresses causing the server to send SYN-ACK packets to hosts that do not exists. By flooding the server, the server will have to use more CPU and Memory to handle traffic which will lead to the server not being able to serve client requests. This is called a DOS (Denial-of-service) attack.
+
+Simply put, we will need you to type in the following command. 
 </p>
 
 <p>
-Now Nmap has to be installed in other OS's but for this distro(distribution) of Linux, we can use this immediately as Linux comes preinstalled. Type in the following command with the IP address, hit enter and wait for a minute or two. nmap -p (insert IP address here). 
+sudo hping3 -c 15000 -d 120 -S -w 64 -p 80 --flood --rand-source (Windows IP address)
 </p>
-
-<p align="center">
-<img src="https://github.com/niloymridul/klmwdetect/assets/139414980/0fcecaa4-308a-4a70-b9b1-7d0f029d7135" height="80%" width="80%" alt="VMBOX look"/>
-</p>
-
-<p>
-The reason why we are doing this command is to see what ports are open or not on the Windows System. After scanning for a while, you will get a message telling you that the scan wasn't able to do much as it appears as if the host is down and it could not ping probes and will most likely tell you of one open port. In the next and final part of the tutorial, we will discuss what would happen if the firewall is down and if we could flood said network and computer.
-</p>
-
 
