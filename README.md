@@ -82,4 +82,9 @@ Now I will explain what each of these means:
 - 8 - --flood - Sends packets as fast as possible
 
 
+<p>
+If you want, you can take a look and open up the resource monitor to see the usage of the CPU, you can see the CPU being used more than it has before. And if you use Wireshark, you can see the flood of TCP packets coming in. This is how hping3 can perform packet flooding. Again, I cannot stress this enough, please do not use this on any other network unless you have permission.
+</p>
+
+
 
