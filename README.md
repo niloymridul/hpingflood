@@ -66,6 +66,12 @@ Simply put, we will need you to type in the following command.
 sudo hping3 -c 15000 -d 120 -S -w 64 -p 80 --flood --rand-source (Windows IP address)
 </p>
 
+
+<p align="center">
+<img src="https://github.com/niloymridul/hpingflood/assets/139414980/39c574e9-9b35-4f62-a2ef-c7806616dcb3" height="60%" width="60%" alt="Firewall"/>
+</p>
+
+
 <p>
 Now I will explain what each of these means:
 </p>
