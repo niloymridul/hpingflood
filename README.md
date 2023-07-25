@@ -15,28 +15,31 @@ This tutorial details the steps of using and understanding packet-flooding softw
   
 <h2>Project Steps</h2>
 <p>
-If you remember from our last tutorial, we installed the virtual machine software called VirtualBox Manager and set up two virtual machines for both Kali Linux and Windows. Now we still have only two things to do before we can actually get into the packet detection setup. 
+Continuing from where we left off, we were stuck at our pings not being able to go through to the Windows Virtual Machine we have. Now, what if we were able to do that because the Windows Firewall was turned off.
+
+Let's go to our Windows Virtual Machine. We are going to turn off Firewall. Now, you may ask why exactly we are turning off our Windows 10 Firewall or what a firewall is. A firewall is an inter-network connection device that prevents and administrated data traffic and data communication inside and between networks. Firewalls, for the everyman, are software installed on computers in order to prevent viruses but they can also be dedicated hardware like switches that have their own software installed and can be connected to the networks themselves physically.
 </p>
 
 <p align="center">
-<img src="https://github.com/niloymridul/klmwdetect/assets/139414980/206a2b3f-6670-4d89-b910-5b7d9ea78462" height="80%" width="80%" alt="VMBOX look"/>
-</p>
-
-<p>First I want you to open VirtualBox Manager if you haven't yet. Then I want you to click on tools above the named virtual machines. After you click on tools, I want you to click on Nat Networks and then Create. There are various forms of Networks you can make but for this lab, we will want to create NAT Network. The reason why is because this network mode allows us to connect both our host computer and our virtual machines. If you want, you can give it whatever name you want.
-</p>
-
-<p align="center">
-<img src="https://github.com/niloymridul/klmwdetect/assets/139414980/f9580457-4b8c-4d11-ad12-8d47e1c1aa07" height="80%" width="80%" alt="VMBOX look"/>
+<img src="https://github.com/niloymridul/hpingflood/assets/139414980/0b8989d8-73b6-4c71-ae8d-b2884764c879" height="60%" width="60%" alt="VMBOX look"/>
 </p>
 
 <p>
-After that, go to both virtual machines and press the button that says settings because we have to make sure that both virtual machines can connect with each other. You will need to go to settings -> network -> adapter 1 for each virtual machine. Click on the dropdown menu, click on attached to, and click Nat Network. Afterward, you will need to click on the specific nat network that you made and named. Click ok and now the settings should be finalized. Again make sure that you do the same thing for both Virtual Machines!
+In this case, with VirtualBox Manager we will just simply need for you to turn off the firewall on the Windows Virtual Machine. Click on the Windows Icon in the bottom left and then type in Firewall and click on Windows Defender Firewall. Once you click on it, please go ahead and click on "Turn Windows Defender Firewall on or off" and make sure for both/all networks that the firewall is off.
 
-Now you can finally start and log in to the virtual machines you have finally made. Click on Start for both of them and log in.
+Now, let's backtrack to our Kali Linux Virtual Machine. I want you to open up the console again if you haven't before. If you use the same Nmap command I had asked you to do, you will get some more information than you had before due to said firewall being down. At least 3 ports have been shown as open. 
 </p>
 
 <p align="center">
-<img src="https://github.com/niloymridul/klmwdetect/assets/139414980/b2d6bdc1-4f84-4351-9b23-79283af3ddd3" alt="Wireshark logo"/>
+<img src="https://github.com/niloymridul/hpingflood/assets/139414980/c3c4b1dd-a008-4552-a61c-7ddea0b8831b" height="60%" width="60%" alt="VMBOX look"/>
+</p>
+
+<p>
+Now, try pinging the Windows IP  address like we had done before and capturing it via Wireshark. As the packets come from we can see two parts of the three-part handshake. We can see the Kali Linux computer sends a packet of requests towards the Windows Computer and in turn, the Windows Computer sends back a reply. And if you look back on the Kali Linux we can see the pings coming back to our console. 
+</p>
+
+<p align="center">
+<img src="https://github.com/niloymridul/hpingflood/assets/139414980/cecc9a34-3a38-42fa-b947-a6a1b55fc683" alt="3 Way Handshake"/>
 </p>
 
 <p>
